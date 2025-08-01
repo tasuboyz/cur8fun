@@ -1,0 +1,1282 @@
+/* Grid Controller Styles */
+
+.header-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+  gap: var(--space-sm);
+}
+
+.grid-controller-container {
+  position: relative;
+  margin-bottom: var(--space-md);
+}
+
+/* Mobile grid controller styles - updating to show grid controller on mobile */
+.grid-controller-container.mobile-hidden {
+  display: block;
+  /* Show on mobile, removing the 'none' value */
+}
+
+.grid-controller {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.grid-controller-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  color: var(--text-color-secondary);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  transition: all 0.2s ease;
+}
+
+
+
+.grid-controls {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+/* Control groups */
+.grid-control-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.grid-control-group label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-right: var(--space-xs);
+}
+
+/* Layout options */
+.grid-layout-options {
+  display: flex;
+  background: var(--background-light);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.grid-layout-option {
+  background: none;
+  border: none;
+  padding: var(--space-xs);
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.grid-layout-option.active {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+}
+
+.grid-layout-option .material-icons {
+  font-size: 20px;
+}
+
+/* Button ripple effect */
+.grid-layout-option::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.grid-layout-option:active::after {
+  animation: ripple 0.5s ease-out;
+}
+
+/* Size control */
+.grid-size-control {
+  display: flex;
+  gap: var(--space-xxs);
+}
+
+.grid-size-option {
+  background-color: var(--background-subtle);
+  border: 1px solid transparent;
+  color: var(--text-color-secondary);
+  padding: var(--space-xxs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  min-width: 2rem;
+  text-align: center;
+}
+
+
+
+.grid-size-option.active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Spacing control */
+.grid-spacing-control {
+  display: flex;
+  gap: var(--space-xxs);
+}
+
+.grid-spacing-option {
+  background-color: var(--background-subtle);
+  border: 1px solid transparent;
+  color: var(--text-color-secondary);
+  padding: var(--space-xxs);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.grid-spacing-option.active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.grid-spacing-option .material-icons {
+  font-size: 1.2rem;
+}
+
+/* Reset button */
+.grid-control-reset {
+  background-color: var(--background-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-color-secondary);
+  padding: var(--space-xxs) var (--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xxs);
+  font-size: 0.85rem;
+}
+
+
+
+.grid-control-reset .material-icons {
+  font-size: 1rem;
+}
+
+/* Responsive handling - update for better mobile experience */
+@media (max-width: 768px) {
+
+  /* Show the grid controller on mobile with compact layout */
+  .grid-controller-container {
+    display: block;
+  }
+
+  /* Simplify controls on mobile */
+  .grid-controller {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+  }
+
+  .grid-controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Adjust layout for mobile posts */
+  .posts-container {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  /* Mobile-optimized list layout */
+  .posts-container.grid-layout-list .post-card {
+    margin-bottom: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+  }
+
+  .posts-container.grid-layout-list .post-main-content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .posts-container.grid-layout-list .post-image-container {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin: var(--space-xs);
+  }
+
+  .posts-container.grid-layout-list .post-content-wrapper {
+    flex: 1;
+    padding: var(--space-xs);
+  }
+
+  .posts-container.grid-layout-list .post-title {
+    font-size: 1rem;
+    margin-bottom: var(--space-xxs);
+  }
+
+  /* Ensure actions are properly aligned on mobile */
+  .posts-container.grid-layout-list .post-actions {
+    padding: var(--space-xs);
+    justify-content: space-between;
+  }
+
+  /* Improve spacing on very small screens */
+  @media (max-width: 480px) {
+
+    .posts-container.grid-layout-list .post-card,
+    .posts-container.grid-layout-compact .post-card {
+      margin-bottom: var(--space-xs);
+    }
+
+    .posts-container.grid-layout-list .post-image-container {
+      width: 100%;
+
+    }
+  }
+}
+
+/* Grid Layout Styles for Posts Container */
+.posts-container.grid-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--space-lg);
+}
+
+/*grid-layout-grid su mobile deve avere solo 1 colonna*/
+
+@media (max-width: 768px) {
+  .grid-layout-grid {
+    grid-template-columns: 1fr;
+    /* Single column on mobile */
+  }
+}
+
+
+/* Sequential appearance of cards */
+.posts-container .post-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.posts-container .post-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.posts-container .post-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.posts-container .post-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.posts-container .post-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.posts-container .post-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.posts-container .post-card:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+.posts-container .post-card:nth-child(8) {
+  animation-delay: 0.8s;
+}
+
+.posts-container .post-card:nth-child(9) {
+  animation-delay: 0.9s;
+}
+
+.posts-container .post-card:nth-child(10) {
+  animation-delay: 1.0s;
+}
+
+.posts-container .post-card:nth-child(11) {
+  animation-delay: 1.1s;
+}
+
+.posts-container .post-card:nth-child(12) {
+  animation-delay: 1.2s;
+}
+
+
+/* Avatar glow effect */
+.avatar-container {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.2) 0%, rgba(var(--primary-color-rgb), 0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+
+
+.post-main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Layout lista */
+.posts-container.grid-layout-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.posts-container.grid-layout-list .post-item {
+  display: flex;
+  flex-direction: row;
+  max-height: 200px;
+}
+
+.posts-container.grid-layout-list .post-thumbnail {
+  min-height: 150px;
+  flex-shrink: 0;
+  display: block !important;
+  /* Ensure thumbnail is always visible */
+}
+
+.posts-container.grid-layout-list .post-content {
+  flex-grow: 1;
+}
+
+/* Layout lista solo su desktop - struttura speciale con header in cima e contenuto affiancato */
+@media (min-width: 768px) {
+  .posts-container.grid-layout-list .post-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  /* Header posizionato in cima */
+  .posts-container.grid-layout-list .post-header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--background-subtle);
+    z-index: 1;
+  }
+
+  /* Contenuto principale in formato orizzontale */
+  .posts-container.grid-layout-list .post-main-content {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    flex-direction: row;
+    /* Overrides the column direction */
+    height: auto;
+  }
+
+  /* Immagine a sinistra */
+  .posts-container.grid-layout-list .post-image-container {
+    min-height: 200px;
+    padding-bottom: 0;
+    position: relative;
+    border-right: 1px solid var(--border-color-light);
+  }
+
+  /* Contenuto testuale a destra */
+  .posts-container.grid-layout-list .post-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  /* ...existing code for grid-layout-list specific styles... */
+}
+
+/* Layout compatto - mantiene la struttura verticale ma con thumbnails */
+.posts-container.grid-layout-compact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.posts-container.grid-layout-compact .post-item {
+  margin-bottom: var(--space-xs);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+}
+
+.posts-container.grid-layout-compact .post-thumbnail {
+  display: block !important;
+  /* Ensure thumbnail is always visible */
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  margin-right: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.posts-container.grid-layout-compact .post-content {
+  flex: 1;
+}
+
+.posts-container.grid-layout-compact .post-title {
+  font-size: 1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.posts-container.grid-layout-compact .post-meta {
+  margin-bottom: 0;
+}
+
+/* Layout lista avanzato - SOLO SU DESKTOP */
+@media (min-width: 768px) {
+  .posts-container.grid-layout-list {
+    gap: var(--space-lg);
+  }
+
+  /* Card design professionale per layout lista con header in cima - SOLO SU DESKTOP */
+  .posts-container.grid-layout-list .post-card {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-box-shadow);
+    border: 1px solid var(--border-color);
+    height: auto;
+  }
+
+  /* Header posizionato in cima */
+  .posts-container.grid-layout-list .post-header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--background-subtle);
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Contenuto principale in formato a due colonne */
+  .posts-container.grid-layout-list .post-main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0;
+  }
+
+  /* Immagine ridimensionata */
+  .posts-container.grid-layout-list .post-image-container {
+    max-height: 200px;
+    width: 300px;
+    padding-bottom: 0;
+    flex-shrink: 0;
+    border-radius: 0;
+    position: relative;
+    border-right: 1px solid var(--border-color-light);
+  }
+
+  /* Contenuto con layout migliorato */
+  .posts-container.grid-layout-list .post-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+  }
+
+  /* Sezione centrale con migliore spaziatura */
+  .posts-container.grid-layout-list .post-content-middle {
+    padding: var(--space-md);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  /* Titolo più grande e prominente */
+  .posts-container.grid-layout-list .post-title {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  /* Mostra l'estratto nel layout lista */
+  .posts-container.grid-layout-list .post-content-middle .post-excerpt {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    color: var(--text-color-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Azioni ridisegnate */
+  .posts-container.grid-layout-list .post-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--space-xl);
+    border-top: 1px solid var(--border-color-light);
+    padding: var(--space-sm) var(--space-md);
+    margin-top: auto;
+
+  }
+
+  /* Layout lista per schermi diversi (ma sempre desktop) */
+  @media (max-width: 1024px) {
+    .posts-container.grid-layout-list .post-main-content {
+      grid-template-columns: 200px 1fr;
+    }
+
+    .posts-container.grid-layout-list .post-content-middle {
+      padding: var(--space-sm);
+    }
+
+    .posts-container.grid-layout-list .post-title {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+/* Miglioramenti per il layout lista - header in cima */
+.posts-container.grid-layout-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Card design professionale per layout lista con header in cima */
+.posts-container.grid-layout-list .post-card {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-box-shadow);
+  border: 1px solid var(--border-color);
+  height: auto;
+}
+
+.post-header {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-color-light);
+  background-color: var(--background-subtle);
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Enhanced avatar container to prevent distortions */
+.post-header .avatar-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-subtle);
+}
+
+/* Fix avatar image */
+.post-header .avatar-container .avatar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+/* Contenuto principale in formato a due colonne */
+.posts-container.grid-layout-list .post-main-content {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+
+
+.error {
+  display: none;
+  border-radius: 100%;
+}
+
+/* Contenuto con layout migliorato */
+.posts-container.grid-layout-list .post-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+
+/* Sezione centrale con migliore spaziatura */
+.posts-container.grid-layout-list .post-content-middle {
+  padding: var(--space-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Titolo più grande e prominente */
+.posts-container.grid-layout-list .post-title {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+
+/* Tags redesign */
+.posts-container.grid-layout-list .post-tags {
+  margin: auto 0 var(--space-sm);
+}
+
+/* Enhanced post actions */
+.post-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--space-xl);
+  padding: var(--space-sm);
+}
+
+/* Add ripple effect to action items */
+.action-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.action-item.interactive {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+
+/* Ripple effect for action buttons */
+.action-item.interactive::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(var(--primary-color-rgb), 0.3);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.action-item.interactive:active::after {
+  animation: ripple 0.5s ease-out;
+}
+
+.posts-container.grid-layout-list .action-item {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+/* Layout lista per schermi diversi */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .posts-container.grid-layout-list .post-main-content {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .posts-container.grid-layout-list .post-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .posts-container.grid-layout-list .post-main-content {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .posts-container.grid-layout-list .post-content-middle {
+    padding: var(--space-sm);
+  }
+}
+
+/* Responsive adjustments per mobile */
+@media (max-width: 768px) {
+  .posts-container.grid-layout-list .post-card {
+    grid-template-rows: auto auto auto;
+  }
+
+  .posts-container.grid-layout-list .post-main-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .posts-container.grid-layout-list .post-image-container {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color-light);
+  }
+
+  .posts-container.grid-layout-list .post-item,
+  .posts-container.grid-layout-compact .post-item {
+    flex-direction: row;
+    /* Keep row direction on mobile too */
+  }
+
+  .posts-container.grid-layout-compact .post-thumbnail {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .posts-container.grid-layout-list .post-card {
+    flex-direction: column;
+  }
+
+  .posts-container.grid-layout-list .post-item {
+    max-height: 150px;
+  }
+
+
+}
+
+/* Rimuovo stili duplicati e obsoleti */
+.posts-container.grid-layout-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+.posts-container.grid-layout-compact .post-card {
+  margin-bottom: 0;
+}
+
+.posts-container.grid-layout-compact .post-title {
+  font-size: 0.9rem;
+}
+
+.posts-container.grid-layout-compact .post-header {
+  padding: var(--space-xs);
+}
+
+.posts-container.grid-layout-compact .post-content-wrapper {
+  padding: var(--space-xs);
+}
+
+.posts-container.grid-layout-compact .post-actions {
+  font-size: 0.8rem;
+}
+
+/* Card size modifiers */
+.posts-container.grid-size-small .post-card {
+  font-size: 0.9rem;
+}
+
+.posts-container.grid-size-small.grid-layout-grid {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.posts-container.grid-size-large .post-card {
+  font-size: 1.1rem;
+}
+
+.posts-container.grid-size-large.grid-layout-grid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.posts-container.grid-size-large.grid-layout-list .post-image-container {
+  width: 280px;
+  height: 180px;
+}
+
+/* Spacing modifiers */
+.posts-container.grid-spacing-tight {
+  gap: var(--space-xs);
+}
+
+.posts-container.grid-spacing-spacious {
+  gap: var(--space-xl);
+}
+
+/* Improve mobile post layouts for all grid types */
+@media (max-width: 768px) {
+
+  /* Grid layout on mobile */
+  .posts-container.grid-layout-grid {
+    grid-template-columns: repeat(1, 1fr);
+    /* Single column on mobile */
+    gap: var(--space-md);
+  }
+
+  .posts-container.grid-layout-grid .post-card {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Square images in grid layout */
+  .posts-container.grid-layout-grid .post-image-container {
+    height: 0;
+    padding-bottom: 100%;
+    /* Aspect ratio 1:1 (quadrato) */
+    position: relative;
+  }
+
+  /* List layout on mobile - improved card design */
+  .posts-container.grid-layout-list .post-card {
+    background-color: var(--background-light);
+    box-shadow: var(--card-box-shadow-sm);
+    overflow: hidden;
+  }
+
+  .posts-container.grid-layout-list .post-header {
+    padding: var(--space-sm);
+    background-color: var(--background-subtle);
+  }
+
+  .posts-container.grid-layout-list .post-main-content {
+    padding: 0;
+  }
+
+  .posts-container.grid-layout-list .post-content-middle {
+    padding: var(--space-sm);
+  }
+
+  /* Square images in list layout */
+  .posts-container.grid-layout-list .post-thumbnail {
+    min-height: 100px;
+    max-height: 100px;
+    width: 100px;
+    aspect-ratio: 1/1;
+  }
+
+  /* Compact layout on mobile - better spacing */
+  .posts-container.grid-layout-compact {
+    grid-template-columns: 1fr;
+    /* Single column for compact view */
+  }
+
+  .posts-container.grid-layout-compact .post-card {
+    padding: var(--space-xs);
+    background-color: var(--background-light);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color-light);
+  }
+}
+
+/* Post Card Unified Layout - altezze fisse e layout uniforme */
+.post-card {
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  /* Altezza fissa totale */
+  background-color: var(--surface-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-box-shadow);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin: 0 auto;
+  /* Centrato orizzontalmente */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  /* Larghezza uniforme */
+  max-width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .post-card {
+    width: 100%;
+    /* Larghezza uniforme */
+    max-width: 100%;
+    height: 100%;
+    /* Altezza automatica per mobile */
+    margin: auto;
+    /* Centrato orizzontalmente */
+    padding: var(--space-sm);
+    /* Padding uniforme per mobile */
+    border-radius: var(--radius-sm);
+    box-shadow: var(--card-box-shadow-sm);
+    border: 1px solid var(--border-color-light);
+    background-color: var(--background-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+}
+
+
+/* Header a altezza fissa */
+.post-header {
+  height: 60px;
+  /* Altezza fissa per l'header */
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-color-light);
+  background-color: var(--background-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Body a altezza fissa con contenuto scrollabile se necessario */
+.post-main-content {
+  height: 300px;
+  /* Altezza fissa per il body */
+  display: flex;
+  flex-direction: column;
+  /* Nasconde il contenuto che eccede */
+}
+
+/* Immagine a altezza fissa */
+.post-image-container {
+  height: auto;
+  /* Altezza fissa per l'immagine */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/*grid layout*/
+.posts-container.grid-layout-grid .post-image-container {
+  height: 420px;
+}
+
+.post-image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/*compact layout*/
+.posts-container.grid-layout-compact .post-image-container {
+  height: 200px;
+  /* Altezza fissa per l'immagine */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: var(--space-xs);
+}
+
+.posts-container.grid-layout-compact .post-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-box-shadow-sm);
+}
+
+/*list layout*/
+.posts-container.grid-layout-list .post-image-container {
+  height: 200px;
+  /* Altezza fissa per l'immagine */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: var(--space-xl);
+}
+
+.posts-container.grid-layout-list .post-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-box-shadow-sm);
+}
+
+.posts-container.grid-layout-grid .post-tags {
+  position: absolute;
+  bottom: 42px;
+  margin: auto 0 var(--space-sm);
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+/*compact layout*/
+.posts-container.grid-layout-compact .post-excerpt {
+  display: none;
+}
+
+/* Wrapper contenuto centrale a altezza fissa */
+.post-content-wrapper {
+  height: 100px;
+  /* Altezza fissa per la sezione di testo */
+  padding: var(--space-sm);
+
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-sm) var(--space-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/*layout lista*/
+.posts-container.grid-layout-list .post-content-wrapper {
+  padding: var(--space-sm) var(--space-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content-middle {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Footer a altezza fissa */
+.post-actions {
+  height: 40px;
+  /* Altezza fissa per il footer */
+  border-top: 1px solid var(--border-color-light);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-xl);
+  width: 100%;
+}
+
+/* Modifica per il layout lista che mantiene l'uniformità */
+@media (min-width: 768px) {
+  .posts-container.grid-layout-list .post-card {
+    height: 400px;
+    /* Mantiene l'altezza totale coerente */
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .posts-container.grid-layout-list .post-main-content {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    display: flex;
+    grid-template-columns: 200px 1fr;
+    height: 340px;
+    flex-direction: row-reverse;
+  }
+
+  .posts-container.grid-layout-list .post-image-container {
+    height: 100%;
+    width: 200px;
+  }
+
+  .posts-container.grid-layout-list .post-content-wrapper {
+    height: 300px;
+    /* Altezza del blocco di testo */
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+
+}
+
+/* Centra le card su dispositivi mobili */
+@media (max-width: 768px) {
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+
+  .post-main-content {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .post-image-container {
+    flex-shrink: 0;
+  }
+
+  .post-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .post-content-middle {
+    flex: 1;
+  }
+
+  /* Assicuriamoci che il footer sia sempre visibile */
+  .post-actions {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    width: 100%;
+  }
+}
+
+.post-content-middle {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+  color: var(--text-color-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+}
+
+.post-content-middle .post-title {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-xs);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+/* Evitiamo eccedenze di contenuto che romperebbero l'uniformità */
+.error.post-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-subtle);
+}
+
+/* Assicura che le immagini di errore siano visualizzate correttamente */
+.post-image-container.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rimuovi la classe 'display: none' per le immagini di errore */
+.error {
+  display: flex !important;
+  border-radius: 0;
+  background-color: var(--background-subtle);
+}
+
+/*list layout*/
+.posts-container.grid-layout-list .post-excerpt {
+  height: 50%;
+  font-size: 0.9rem;
+}
+
+/*compact layout*/
+.posts-container.grid-layout-compact .post-card {
+  height: auto;
+}
+
+.posts-container.grid-layout-compact .post-community {
+  display: none;
+}
+
+.posts-container.grid-layout-compact .payout-actions {
+  display: none;
+  background-color: blue;
+}
+
+.posts-container.grid-layout-compact .post-actions {
+  gap: var(--space-sm);
+}
+
+.posts-container.grid-layout-list {
+  max-width: 80%;
+  margin: 0 auto;
+}

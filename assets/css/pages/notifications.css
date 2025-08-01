@@ -1,0 +1,715 @@
+/* Notifications View Styles */
+.notifications-view {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-md);
+}
+
+@media screen and (max-width: 768px) {
+    .notifications-view {
+        padding: var(--space-sm);
+    }
+}
+
+/* Header and title */
+.notifications-view .view-title {
+    color: var(--text-heading);
+    font-size: 1.8rem;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    padding-bottom: var(--space-sm);
+}
+
+.notifications-view .view-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: var(--radius-pill);
+}
+
+/* Filter buttons */
+.notification-filters {
+    display: flex;
+    flex-wrap: nowrap;    overflow-x: auto;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+}
+
+.notification-filters::-webkit-scrollbar {
+    height: 4px;
+}
+
+.notification-filters::-webkit-scrollbar-thumb {
+    background-color: var(--text-muted);
+    border-radius: var(--radius-pill);
+}
+
+.notification-filters .filter-btn {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-pill);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-normal);
+}
+
+.notification-filters .filter-btn:hover {
+    background: var(--background-lighter);
+    border-color: var(--border-light);
+    transform: translateY(-1px);
+}
+
+.notification-filters .filter-btn.active {
+    background: var(--primary-color);
+    color: var(--text-on-primary);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Action bar */
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+    gap: 10px;
+}
+
+.action-bar .left-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.action-bar .right-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.action-bar button {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-xs) var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.action-bar button:hover {
+    background: var(--background-lighter);
+    border-color: var(--border-light);
+    transform: translateY(-1px);
+}
+
+.action-bar .mark-read-btn {
+    color: var(--secondary-color);
+}
+
+.action-bar .refresh-btn {
+    padding: var(--space-xs) var(--space-sm);
+}
+
+.action-bar .material-icons {
+    font-size: 1.2rem;
+}
+
+.force-load-btn {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.force-load-btn:hover {
+    background-color: #d35400;
+    transform: rotate(180deg) translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual notification styles */
+.notifications-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 0 var(--space-xs);
+}
+
+.notification {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: var(--space-md);
+    background: var(--surface-color);
+    border-radius: var(--radius-md);
+    border-left: 4px solid transparent;
+    gap: var(--space-md);
+    transition: all var(--transition-normal);
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.notification:hover {
+    background: var(--background-lighter);
+    transform: translateY(-3px);
+    box-shadow: var(--subtle-shadow);
+}
+
+/* Different colors for different notification types */
+.notification.replies-notification {
+    border-left-color: #3498db; /* Blue for replies */
+    background-image: linear-gradient(to right, rgba(52, 152, 219, 0.05), transparent 30%);
+}
+
+.notification.mentions {
+    border-left-color: #9b59b6; /* Purple for mentions */
+    background-image: linear-gradient(to right, rgba(155, 89, 182, 0.05), transparent 30%);
+}
+
+.notification.follows {
+    border-left-color: var(--secondary-color); /* Green for follows */
+    background-image: linear-gradient(to right, rgba(46, 204, 113, 0.05), transparent 30%);
+}
+
+.notification.upvotes {
+    border-left-color: #e74c3c; /* Red for upvotes */
+    background-image: linear-gradient(to right, rgba(231, 76, 60, 0.05), transparent 30%);
+}
+
+.notification.resteems {
+    border-left-color: #f39c12; /* Orange for resteems */
+    background-image: linear-gradient(to right, rgba(243, 156, 18, 0.05), transparent 30%);
+}
+
+/* Read vs unread state */
+.notification.read {
+    opacity: 0.85;
+    background: var(--surface-color);
+    background-image: none;
+    box-shadow: none;
+}
+
+/* Make upvotes always have their distinctive color, even when read */
+.notification.upvotes.read {
+    border-left-color: var(--secondary-color);
+    background-image: linear-gradient(to right, rgba(231, 76, 60, 0.05), transparent 30%);
+    opacity: 0.7;
+}
+
+.notification.mentions.read {
+    border-left-color: rgba(155, 89, 182, 0.4); /* Keep a hint of mentions color */
+}
+
+.notification.follows.read {
+    border-left-color: rgba(46, 204, 113, 0.4); /* Keep a hint of follows color */
+}
+
+.notification.replies-.notification.read {
+    border-left-color: rgba(52, 152, 219, 0.4); /* Keep a hint of replies color */
+}
+
+.notification.resteems.read {
+    border-left-color: rgba(243, 156, 18, 0.4); /* Keep a hint of resteems color */
+}
+
+.notification.unread {
+    background: var(--background-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.notification .unread-indicator {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.notification .notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--background-lighter);
+    transition: all var(--transition-normal);
+}
+
+.notification.replies-notification {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.notification.mentions {
+    background-color: rgba(155, 89, 182, 0.1);
+}
+
+.notification.follows {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+
+.notification.resteems  {
+    background-color: rgba(243, 156, 18, 0.1);
+}
+
+.notification:hover  {
+    transform: scale(1.1);
+}
+
+.notification .material-icons {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+}
+
+.notification.replies-notification .notification-icon .material-icons {
+    color: #3498db;
+}
+
+.notification.mentions .notification-icon .material-icons {
+    color: #9b59b6;
+}
+
+.notification.follows .notification-icon .material-icons {
+    color: var(--secondary-color);
+}
+
+.notification.upvotes .notification-icon .material-icons {
+    color: var(--secondary-color);
+}
+
+.notification.resteems .notification-icon .material-icons {
+    color: #f39c12;
+}
+
+.notification .notification-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    overflow: hidden;
+}
+
+.notification .notification-text {
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.notification .notification-time {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.notification .user {
+    color: var(--primary-light);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.notification .user:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.notification .content-link {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.notification .content-link:hover {
+    color: var(--primary-color);
+}
+
+.notification .excerpt {
+    color: var(--text-secondary);
+    font-style: italic;
+    display: block;
+    margin-top: var(--space-xs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Observer target for infinite scroll */
+#notifications-observer-target {
+    width: 100%;
+    height: 20px;
+    margin: 10px 0;
+    visibility: hidden;
+}
+
+/* Observer target per infinite scroll */
+.observer-target {
+    width: 100%;
+    height: 20px;
+    margin: 30px 0;
+    visibility: hidden; /* Hide in production */
+    pointer-events: none; /* Ensure it doesn't interfere with clicks */
+    position: relative;
+    z-index: -1; /* Push below other elements */
+}
+
+/* For debugging only - add this class if you want to see the target */
+.observer-target.debug {
+    visibility: visible;
+    border-bottom: 1px dashed red;
+    background-color: rgba(255, 0, 0, 0.05);
+}
+
+/* End message styling */
+.end-message {
+    text-align: center;
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+}
+
+.empty-state .material-icons {
+    font-size: 4rem;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-secondary);
+}
+
+/* Error message */
+.error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl);
+    color: #e74c3c;
+    text-align: center;
+}
+
+.error-message .material-icons {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+}
+
+/* Button to load all historical upvotes */
+.load-all-btn {
+    display: flex;
+    margin: 10px auto;
+    padding: 15px 25px;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: var(--subtle-shadow);
+}
+
+.load-all-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--elevated-shadow);
+}
+
+.load-all-btn.primary {
+    background: #e74c3c; /* Colore upvote */
+}
+
+.load-all-btn.primary:hover {
+    background: #c0392b;
+}
+
+.load-all-btn .material-icons {
+    font-size: 1.4rem;
+}
+
+/* Busy message overlay */
+#notifications-busy-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;    min-width: 350px;
+    max-width: 90vw;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+#notifications-busy-message  {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: notifications-spin 1s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .notification-filters {
+        padding-bottom: var(--space-xs);
+    }
+    
+    .notification {
+        grid-template-columns: auto 1fr;
+        padding: var(--space-sm) var(--space-md);
+        gap: var(--space-sm);
+    }
+    
+    .notification .notification-content {
+        grid-column: 2;
+    }
+    
+    .action-bar .mark-read-btn span:not(.material-icons) {
+        display: none;
+    }
+    
+    /* Additional mobile improvements */
+    .notifications-view .view-title {
+        font-size: 1.5rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    .notification-filters .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .notification-filters::-webkit-scrollbar {
+        height: 2px;
+    }
+    
+    /* Give more breathing room on mobile */
+    .notifications-container {
+        gap: var(--space-sm);
+    }
+    
+    .load-all-buttons {
+        margin: 15px 0 !important;
+    }
+    
+    .load-all-buttons p {
+        font-size: 0.9rem;
+        margin-bottom: 8px !important;
+    }
+    
+    /* Make the force load button more accessible on mobile */
+    .force-load-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Improve notification display */
+    .notification .excerpt {
+        max-width: 250px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.notification {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes notifications-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+    #notifications-busy-message {
+        min-width: auto;
+        width: 85%;
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+    
+    #notifications-busy-message  {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 15px;
+        border-width: 3px;
+    }
+    
+    .load-all-btn {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .load-all-btn .material-icons {
+        font-size: 1.2rem;
+    }
+    
+    .notification {
+        padding: 10px;
+        gap: 8px;
+        border-left-width: 3px;
+    }
+    
+    .notification .notification-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .notification .notification-icon .material-icons {
+        font-size: 1.1rem;
+    }
+    
+    .notification .notification-content {
+        font-size: 0.9rem;
+    }
+    
+    .notification .excerpt {
+        max-width: 200px;
+        font-size: 0.85em;
+        padding: 3px 6px;
+    }
+    
+    /* Action bar adjustments for mobile */
+    .action-bar {
+        flex-wrap: wrap;
+    }
+    
+    .action-bar button {
+        font-size: 0.85rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .load-all-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .load-all-buttons p {
+        margin-bottom: 5px !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+    .notification .notification-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .notification .notification-icon .material-icons {
+        font-size: 1rem;
+    }
+    
+    .notification {
+        padding: 8px;
+        gap: 6px;
+        border-left-width: 3px;
+    }
+    
+    .notification .notification-text {
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+    
+    .notification .notification-time {
+        font-size: 0.7rem;
+    }
+    
+    .notification-filters {
+        gap: 5px;
+    }
+    
+    .notification-filters .filter-btn {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+    
+    #notifications-busy-message {
+        width: 90%;
+        padding: 15px;
+        font-size: 0.8rem;
+    }
+    
+    .empty-state h3 {
+        font-size: 1.2rem;
+    }
+    
+    .empty-state p {
+        font-size: 0.9rem;
+    }
+    
+    .view-title {
+        font-size: 1.3rem !important;
+    }
+    
+    .notification .unread-indicator {
+        width: 6px;
+        height: 6px;
+        top: 8px;
+        right: 8px;
+    }
+}
+

@@ -1,0 +1,573 @@
+/* Stili per il dropdown dei beneficiari - riproduce esattamente quelli della search */
+.beneficiary-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.beneficiary-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md, 4px);
+  margin-top: 5px;
+  box-shadow: var(--popup-box-shadow, 0 4px 8px rgba(0, 0, 0, 0.15));
+  max-height: 300px;
+  overflow-y: auto;
+  transition: all 0.2s ease;
+  display: none;
+  z-index: 1000;
+}
+
+.beneficiary-suggestions.active {
+  display: block;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestion-item {
+  padding: var(--space-md, 8px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md, 8px);
+  cursor: pointer;
+  transition: background var(--transition-fast, 0.15s);
+  border-bottom: 1px solid var(--border-color-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+  background: var(--background-lighter);
+}
+
+.suggestion-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: var(--primary-color);
+  transition: height 0.2s ease;
+}
+
+.suggestion-item:hover::before {
+  height: 100%;
+}
+
+.suggestion-avatar-container {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--subtle-shadow, 0 1px 3px rgba(0,0,0,0.1));
+}
+
+.suggestion-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.suggestion-item:hover .suggestion-avatar {
+  transform: scale(1.05);
+}
+
+.suggestion-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.suggestion-username {
+  font-weight: 500;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-color);
+}
+
+.suggestion-about {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loading-suggestions {
+  padding: 15px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.no-suggestions {
+  padding: 15px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Migliora la visualizzazione del container di input */
+#beneficiary-name {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+#beneficiary-name:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-alpha);
+  outline: none;
+}
+
+/* Nuovi stili per il supporto di beneficiari multipli */
+.beneficiaries-list {
+  margin-top: 15px;
+  border-radius: var(--radius-md, 4px);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.beneficiary-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: var(--background-light);
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s ease;
+}
+
+.beneficiary-item:last-child {
+  border-bottom: none;
+}
+
+.beneficiary-item:hover {
+  background-color: var(--background-lighter);
+}
+
+.beneficiary-name {
+  flex: 2;
+  font-weight: 500;
+  padding: 0 10px;
+}
+
+.beneficiary-percentage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 500;
+}
+
+.beneficiary-weight-slider {
+  flex: 3;
+  margin: 0 15px;
+}
+
+.beneficiary-actions {
+  margin-left: 10px;
+}
+
+.beneficiary-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.beneficiary-actions button:hover {
+  background-color: var(--background);
+}
+
+.beneficiary-actions button span {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beneficiary-actions button:hover span {
+  color: var(--danger-color);
+}
+
+.add-beneficiary-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--background-light);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md, 4px);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-beneficiary-btn:hover {
+  background-color: var(--background-lighter);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.add-beneficiary-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.beneficiary-summary {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--background-lighter);
+  border-radius: var(--radius-md, 4px);
+  font-size: 0.9em;
+}
+
+.beneficiary-summary-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.beneficiary-summary-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.beneficiary-summary-total {
+  font-weight: 500;
+}
+
+/* Stile per la percentuale totale quando supera il limite */
+.total-exceed {
+  color: var(--danger-color);
+}
+
+.total-warning {
+  color: var(--warning-color);
+}
+
+.total-ok {
+  color: var(--success-color);
+}
+
+/* Migliora il layout per dispositivi mobili */
+@media (max-width: 767px) {
+  .beneficiary-item {
+    flex-wrap: wrap;
+  }
+  
+  .beneficiary-name {
+    flex: 100%;
+    order: 1;
+    margin-bottom: 8px;
+  }
+  
+  .beneficiary-weight-slider {
+    flex: 1;
+    order: 2;
+    margin: 0;
+  }
+  
+  .beneficiary-percentage {
+    flex: 0 0 60px;
+    order: 3;
+  }
+  
+  .beneficiary-actions {
+    order: 4;
+  }
+}
+
+/* Stili per il popup di aggiunta beneficiario */
+.add-beneficiary-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+.add-beneficiary-dialog .dialog-content {
+  background-color: var(--background);
+  border-radius: var(--radius-lg, 8px);
+  box-shadow: var(--popup-box-shadow, 0 8px 24px rgba(0, 0, 0, 0.2));
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: scaleIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+.add-beneficiary-dialog .dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.add-beneficiary-dialog .dialog-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.add-beneficiary-dialog .close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.add-beneficiary-dialog .close-button:hover {
+  background-color: var(--background-lighter);
+}
+
+.add-beneficiary-dialog .close-button span {
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.add-beneficiary-dialog .dialog-body {
+  padding: 20px;
+}
+
+.add-beneficiary-dialog .form-group {
+  margin-bottom: 20px;
+}
+
+.add-beneficiary-dialog .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.add-beneficiary-dialog .form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md, 4px);
+  background-color: var(--background-light);
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.add-beneficiary-dialog .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-alpha);
+  outline: none;
+}
+
+.add-beneficiary-dialog .range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  outline: none;
+  margin: 10px 0;
+}
+
+.add-beneficiary-dialog .range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add-beneficiary-dialog .range-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.add-beneficiary-dialog .range-value {
+  text-align: center;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Stili per i pulsanti delle percentuali predefinite */
+.percent-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.percent-preset-btn {
+  background-color: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm, 3px);
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+  min-width: 50px;
+  text-align: center;
+}
+
+.percent-preset-btn:hover {
+  background-color: var(--background-lighter);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.percent-preset-btn:active {
+  transform: scale(0.97);
+}
+
+.percent-preset-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.add-beneficiary-dialog .dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.add-beneficiary-dialog .dialog-error {
+  background-color: var(--danger-color-alpha, rgba(220, 53, 69, 0.1));
+  color: var(--danger-color, #dc3545);
+  padding: 10px;
+  border-radius: var(--radius-md, 4px);
+  margin-bottom: 15px;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Miglioramenti alla visualizzazione dell'avatar */
+.suggestion-avatar-container {
+  position: relative;
+}
+
+.suggestion-avatar-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--success-color);
+  border-radius: 50%;
+  border: 2px solid var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suggestion-avatar-badge span {
+  color: white;
+  font-size: 8px;
+  line-height: 1;
+}
+
+/* Miglioramenti ai suggerimenti del beneficiario */
+.user-search-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: var(--background-lighter);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.user-search-header .material-icons {
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+.user-search-footer {
+  padding: 8px 12px;
+  background-color: var(--background-lighter);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.user-search-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.user-search-footer a:hover {
+  text-decoration: underline;
+}

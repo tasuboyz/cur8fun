@@ -1,0 +1,47 @@
+setup-steem-social-network.bat
+steem-social-network-class-diagram.mermaid
+/test
+utils/desiderata
+utils/input
+utils/output
+assets/tests/input.txt
+assets/tests/output.txt
+assets/tests/target.txt
+/.well-known
+sito-vetrina-figo/index.html
+sito-vetrina-figo/logo_tra.png
+sito-vetrina-figo/style.css
+pwa-icon-generator.html
+services/token-test.js
+services/verify-token.js
+/.venv
+/instance
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+/app/__pycache__/
+/python/__pycache__/
+
+# Database SQLite
+*.db
+*.sqlite3
+*.sqlite
+
+# Ambiente virtuale
+venv/
+env/
+ENV/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+.hintrc

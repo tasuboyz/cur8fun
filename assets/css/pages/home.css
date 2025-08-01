@@ -1,0 +1,113 @@
+/* Tag List Styles */
+.tag-selection-bar {
+  display: flex;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-sm) 0;
+  position: relative;
+}
+
+.tag-list-container {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -ms-overflow-style: none; /* IE and Edge */
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-xs) 0;
+}
+
+/* Minimal scrollbar styling */
+.tag-list-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tag-list-container::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+.tag-list-container::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.tag-list {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  width: max-content;
+}
+
+.tag-item {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--background-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.tag-item:hover {
+  background-color: var(--background-lighter);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.tag-item.active {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  border-color: var(--primary-color);
+}
+
+
+/* Custom Tag Input Styles */
+.custom-tag-container {
+  display: flex;
+  flex: 1;
+  max-width: 400px;
+}
+
+.custom-tag-input {
+  flex: 1;
+  padding: var(--space-md) var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-size: 14px;
+  background-color: var(--background-light);
+  color: var(--text-color);
+}
+
+.custom-tag-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-md);
+  background-color: var(--secondary-color);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.custom-tag-button:hover {
+  background-color: var(--secondary-dark);
+}
+
+@media (max-width: 768px) {
+  .tag-selection-bar {
+    padding: var(--space-xs) 0;
+  }
+  
+  .tag-item {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.85rem;
+  }
+  
+  .tag-selection-bar::before,
+  .tag-selection-bar::after {
+    width: 20px;
+  }
+}

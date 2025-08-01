@@ -1,0 +1,236 @@
+
+/* Header styling */
+.post-header {
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    border-bottom: 1px solid var(--border-color-light);
+}
+
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.post-author {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+}
+
+.post-date {
+    font-size: 0.8rem;
+    color: var(--text-color-secondary);
+}
+
+
+
+/* Per layout lista aggiungiamo spazio per l'excerpt quando disponibile */
+.grid-layout-list .post-content-middle {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.post-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    color: var(--text-color);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Tags styling - more compact and right under title */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xs);
+}
+
+.post-tag {
+    background-color: var(--background-subtle);
+    color: var(--text-color-secondary);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.post-tag:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+    transition: color 0.2s ease;
+}
+
+.action-item .material-icons {
+    font-size: 1.2rem;
+}
+
+.vote-action:hover {
+    color: var(--color-upvote);
+}
+
+.comment-action:hover {
+    color: var(--color-primary);
+}
+
+.payout-action:hover {
+    color: var(--color-success);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .posts-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--space-lg);
+    }
+
+}
+
+/* Miglioriamo il design dell'autore per il layout lista */
+.grid-layout-list .post-author {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.grid-layout-list .post-date {
+    font-size: 0.85rem;
+}
+
+/* Supporto specifico per layout lista */
+.grid-layout-list .post-content-middle {
+    position: relative;
+}
+
+/* Miglioramenti header per layout lista */
+.grid-layout-list .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.grid-layout-list .post-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.grid-layout-list .post-author {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.grid-layout-list .post-date {
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+    margin-left: auto;
+}
+
+/* Migliorare stili di hover per interazioni più sofisticate */
+.post-card:hover .post-title {
+    color: var(--color-primary);
+}
+
+/* Aumentare la visibilità degli elementi interattivi al hover */
+.grid-layout-list .post-card:hover .action-item {
+    opacity: 0.9;
+}
+
+.grid-layout-list .post-card .action-item {
+    opacity: 0.7;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+/* Layout per post-main-content */
+.post-main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Modifiche per layout lista - SOLO SU DESKTOP */
+@media (min-width: 768px) {
+
+    /* Layout per post-main-content nel layout lista */
+    .grid-layout-list .post-main-content {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+    }
+
+    /* Miglioramenti header per layout lista */
+    .grid-layout-list .post-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .grid-layout-list .post-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+
+    .grid-layout-list .post-author {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .grid-layout-list .post-date {
+        font-size: 0.85rem;
+        color: var(--text-color-secondary);
+        margin-left: auto;
+    }
+
+    /* Migliorare stili di hover per interazioni più sofisticate */
+    .grid-layout-list .post-card:hover .post-title {
+        color: var(--color-primary);
+    }
+
+    /* Aumentare la visibilità degli elementi interattivi al hover */
+    .grid-layout-list .post-card:hover .action-item {
+        opacity: 0.9;
+    }
+
+    .grid-layout-list .post-card .action-item {
+        opacity: 0.7;
+        transition: opacity 0.2s ease, color 0.2s ease;
+    }
+}

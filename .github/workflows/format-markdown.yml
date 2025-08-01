@@ -1,0 +1,149 @@
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      text:
+        description: 'Testo da formattare'
+        required: true
+        type: string
+      style:
+        description: 'Stile di formattazione'
+        required: true
+        default: 'social'
+        type: choice
+        options:
+          - social
+          - technical
+          - blog
+      filename:
+        description: 'Nome del file di output (senza estensione)'
+        required: false
+        type: string
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    outputs:
+      result_path: ${{ steps.save_result.outputs.result_path }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Format Markdown with OpenAI SDK
+        id: format
+        env:
+          GITHUB_TOKEN: ${{ secrets.MODELS_AI_TOKEN }}
+        run: |
+          # Installa le dipendenze necessarie
+          npm install openai
+          
+          # Crea file con il testo di input
+          cat > input.txt << 'EOF'
+          ${{ github.event.inputs.text }}
+          EOF
+          
+          # Determina il prompt di sistema in base allo stile
+          if [ "${{ github.event.inputs.style }}" = "social" ]; then
+            SYSTEM_PROMPT="You are a formatting tool that converts plain text to clean Markdown. Your ONLY job is to format the provided text - do not add any comments, opinions, or extra content of your own. Use standard Markdown syntax without special characters. Format with an engaging, social media friendly style using appropriate headings, emphasis, and lists. Never wrap your response in markdown code blocks or quotes."
+          elif [ "${{ github.event.inputs.style }}" = "technical" ]; then
+            SYSTEM_PROMPT="You are a formatting tool that converts plain text to clean Markdown. Your ONLY job is to format the provided text - do not add any comments, opinions, or extra content of your own. Use standard Markdown syntax without special characters. Format in a technical documentation style with proper headings, code blocks, tables, and lists as appropriate. Never wrap your response in markdown code blocks or quotes."
+          else
+            SYSTEM_PROMPT="You are a formatting tool that converts plain text to clean Markdown. Your ONLY job is to format the provided text - do not add any comments, opinions, or extra content of your own. Use standard Markdown syntax without special characters. Format in a blog style with engaging headings, emphasis, and good paragraph structure. Never wrap your response in markdown code blocks or quotes."
+          fi
+          
+          # Leggi il testo di input
+          INPUT_TEXT=$(cat input.txt)
+          
+          echo "Chiamata API GitHub Models con OpenAI SDK..."
+          echo "Token: Usando MODELS_AI_TOKEN (prime 3 caratteri: ${GITHUB_TOKEN:0:3}...)"
+          echo "SYSTEM_PROMPT: $SYSTEM_PROMPT"
+          echo "Input text: $INPUT_TEXT"
+          
+          # Crea e esegui lo script Node.js
+          cat > format-script.mjs << EOF
+          import OpenAI from "openai";
+          import fs from 'fs';
+          
+          const token = process.env.GITHUB_TOKEN;
+          const endpoint = "https://models.github.ai/inference/";
+          const modelName = "openai/gpt-4o";
+          
+          async function formatMarkdown() {
+            try {
+              const client = new OpenAI({ baseURL: endpoint, apiKey: token });
+              
+              const completion = await client.chat.completions.create({
+                messages: [
+                  { role: "system", content: "$SYSTEM_PROMPT" },
+                  { role: "user", content: "Apply proper Markdown formatting to this text. Do not add any commentary or extra content - ONLY format what I provide: $INPUT_TEXT" }
+                ],
+                model: modelName
+              });
+              
+              return completion.choices[0].message.content;
+            } catch (error) {
+              console.error("Error calling GitHub Models API:", error);
+              throw error;
+            }
+          }
+          
+          formatMarkdown()
+            .then(result => {
+              fs.writeFileSync('formatted_result.md', result);
+              console.log("Formattazione completata con successo!");
+            })
+            .catch(err => {
+              console.error("Errore durante la formattazione:", err);
+              fs.writeFileSync('formatted_result.md', '# Errore di formattazione\n\nSi è verificato un errore durante la formattazione del testo.');
+              process.exit(1);
+            });
+          EOF
+          
+          # Esegui lo script
+          node format-script.mjs
+          
+          # Verifica che il risultato sia stato generato correttamente
+          if [ ! -s formatted_result.md ]; then
+            echo "ERRORE: Risultato non generato"
+            echo "# Errore di formattazione" > formatted_result.md
+            echo "" >> formatted_result.md
+            echo "Si è verificato un errore durante la formattazione del testo." >> formatted_result.md
+          fi  
+      - name: Save result to repository
+        id: save_result
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          mkdir -p formatted-results
+          
+          # Usa il nome file fornito come input o genera un timestamp
+          FILENAME=""
+          if [ -n "${{ github.event.inputs.filename }}" ]; then
+            # Usa il nome file fornito dall'utente
+            FILENAME="${{ github.event.inputs.filename }}"
+          else
+            # Usa un timestamp come nome file di default
+            FILENAME=$(date +%Y%m%d%H%M%S)
+          fi
+          
+          # Aggiungi l'ID del run al nome file per renderlo unico
+          RESULT_FILE="formatted-results/${FILENAME}-${GITHUB_RUN_ID}.md"
+          mv formatted_result.md $RESULT_FILE
+          git add $RESULT_FILE
+          
+          git commit -m "Add formatted markdown result [skip ci]"
+          git push
+          echo "result_path=${RESULT_FILE}" >> $GITHUB_OUTPUT
+          
+      - name: Upload result as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: formatted-markdown
+          path: ${{ steps.save_result.outputs.result_path }}

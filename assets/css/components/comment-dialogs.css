@@ -1,0 +1,237 @@
+/* Styles for comment-related dialogs and notifications */
+
+/* Common Dialog Styles - Updated to match app's general style */
+.rc-error-overlay,
+.posting-error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.rc-error-dialog,
+.posting-error-dialog {
+  background-color: var(--modal-background);
+  border-radius: var(--radius-md);
+  box-shadow: var(--popup-box-shadow);
+  padding: var(--space-lg);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  margin: 0;
+  animation: slideUpFade 0.3s ease-out;
+  z-index: calc(var(--z-modal) + 1);
+}
+
+.rc-error-dialog-title,
+.posting-error-dialog-title {
+  color: var(--text-heading);
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Icon container with consistent styling */
+.rc-error-icon,
+.posting-error-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+}
+
+.rc-error-icon .material-icons,
+.posting-error-icon .material-icons {
+  font-size: 48px;
+  padding: var(--space-sm);
+  border-radius: 50%;
+}
+
+/* RC error uses warning color */
+.rc-error-icon .material-icons {
+  color: var(--banner-warning);
+  background-color: rgba(243, 156, 18, 0.1);
+}
+
+/* Posting error uses primary color */
+.posting-error-icon .material-icons {
+  color: var(--primary-color);
+  background-color: rgba(255, 117, 24, 0.1);
+}
+
+/* Message styling */
+.rc-error-message,
+.posting-error-message,
+.posting-error-explanation {
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  color: var(--text-color);
+}
+
+.posting-error-explanation {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Links with consistent styling */
+.rc-error-link,
+.posting-error-link {
+  display: inline-block;
+  margin-bottom: var(--space-lg);
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.rc-error-link:hover,
+.posting-error-link:hover {
+  text-decoration: underline;
+}
+
+.rc-error-link::after,
+.posting-error-link::after {
+  content: " →";
+  transition: transform 0.2s ease;
+}
+
+.rc-error-link:hover::after,
+.posting-error-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* Button container */
+.rc-error-buttons,
+.posting-error-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* Button styling consistent with modal buttons */
+.rc-error-close-btn,
+.posting-error-close-btn,
+.posting-error-login-btn {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  font-size: 0.9rem;
+}
+
+.rc-error-close-btn:hover,
+.posting-error-close-btn:hover,
+.posting-error-login-btn:hover {
+  transform: translateY(-1px);
+}
+
+.rc-error-close-btn,
+.posting-error-close-btn {
+  background-color: var(--button-secondary);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.rc-error-close-btn:hover,
+.posting-error-close-btn:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+.posting-error-login-btn {
+  background-color: var(--button-primary);
+  color: var(--text-on-primary);
+}
+
+.posting-error-login-btn:hover {
+  background-color: var(--button-primary-hover);
+}
+
+/* Loading overlay */
+.comment-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background-color: rgba(var(--background-rgb, 255, 255, 255), 0.8);
+}
+
+.comment-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+.comment-loading-text {
+  margin-left: var(--space-sm);
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations from modals.css */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpFade {
+  from { 
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to { 
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Highlight for new replies */
+.highlight-new-reply {
+  animation: highlight-fade 2s ease-in-out;
+}
+
+@keyframes highlight-fade {
+  0%,
+  20% {
+    background-color: rgba(var(--primary-color-rgb, 255, 117, 24), 0.2);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
