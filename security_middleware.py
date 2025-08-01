@@ -90,7 +90,7 @@ class SecurityHeadersMiddleware:
                 "https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com "
                 "https://telegram.org https://cdnjs.cloudflare.com; "
                 "style-src 'self' 'unsafe-inline' "
-                "https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
+                "https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; "
                 "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; "
                 "img-src 'self' data: https: blob:; "
                 "connect-src 'self' https: wss:; "
