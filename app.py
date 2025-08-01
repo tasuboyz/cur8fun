@@ -343,7 +343,8 @@ def retry_failed_posts():
 if __name__ == '__main__':
     publisher.start()
     try:
-        app.run(debug=True)
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port, debug=True)
     finally:
         publisher.stop()
 
