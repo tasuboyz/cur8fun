@@ -17,6 +17,16 @@ services/verify-token.js
 /.venv
 /instance
 
+# Environment and secrets
+.env
+.env.local
+.env.production
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
 # Python
 __pycache__/
 *.py[cod]

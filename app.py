@@ -6,6 +6,8 @@ import os
 import sys
 import re
 
+# Security middleware
+from security_middleware import CloudflareSecurityMiddleware, SecurityHeadersMiddleware
 
 # Aggiungi la directory app alla path per poter importare il modulo models
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'app'))
@@ -14,11 +16,24 @@ from python.publisher import publisher
 from python.meta_generator import meta_generator
 
 app = Flask(__name__)
-CORS(app)  # Abilita CORS per tutte le routes
+
+# Initialize security middleware
+cf_security = CloudflareSecurityMiddleware(app)
+security_headers = SecurityHeadersMiddleware(app)
+
+# CORS configuration - restrict in production
+cors_origins = os.environ.get('CORS_ORIGINS', '*').split(',')
+CORS(app, origins=cors_origins)  # Restrict CORS in production
 
 # Configurazione database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///steemee.db'
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///steemee.db')
+# Handle PostgreSQL URL format for some hosting services
+if database_url.startswith('postgres://'):
+    database_url = database_url.replace('postgres://', 'postgresql://')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-change-in-production')
 db.init_app(app)
 
 # Inizializzazione del database
@@ -339,12 +354,22 @@ def retry_failed_posts():
         "message": f"Marked {retry_count} posts for retry"
     })
 
-# Start publisher service in development
+# Production-ready startup
+def create_app():
+    """Factory function for creating the app"""
+    return app
+
+# Start publisher service
 if __name__ == '__main__':
+    # Development mode
     publisher.start()
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(host='0.0.0.0', port=port, debug=True)
+        debug_mode = os.environ.get('FLASK_ENV', 'development') == 'development'
+        app.run(host='0.0.0.0', port=port, debug=debug_mode)
     finally:
         publisher.stop()
+else:
+    # Production mode - publisher will be started by the WSGI server
+    publisher.start()
 
